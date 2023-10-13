@@ -1,0 +1,30 @@
+# compiled output
+nest-moretech/dist
+nest-moretech/node_modules
+nest-moretech# Logs
+nest-moretechlogs
+nest-moretech*.log
+nest-moretechnpm-debug.log*
+nest-moretechpnpm-debug.log*
+nest-moretechyarn-debug.log*
+nest-moretechyarn-error.log*
+nest-moretechlerna-debug.log*
+nest-moretech# OS
+nest-moretech.DS_Store
+nest-moretech# Tests
+nest-moretech/coverage
+nest-moretech/.nyc_output
+nest-moretech# IDEs and editors
+nest-moretech/.idea
+nest-moretech.project
+nest-moretech.classpath
+nest-moretech.c9/
+nest-moretech*.launch
+nest-moretech.settings/
+nest-moretech*.sublime-workspace
+nest-moretech# IDE - VSCode
+nest-moretech.vscode/*
+nest-moretech!.vscode/settings.json
+nest-moretech!.vscode/tasks.json
+nest-moretech!.vscode/launch.json
+nest-moretech!.vscode/extensions.json
