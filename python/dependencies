@@ -1,0 +1,15 @@
+uvicorn
+gunicorn
+fastapi
+python-dotenv
+python-multipart
+pandas
+numpy
+sweetviz
+matplotlib
+scipy
+seaborn
+scikit-learn
+dill
+pydantic
+torch
