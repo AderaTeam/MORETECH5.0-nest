@@ -6,7 +6,6 @@ export class OpenHoursIndividual {
 
     @PrimaryColumn()
     @ManyToOne(() => Office, (office) => office.openHoursIndividual)
-    @JoinTable()
     office: number
 
     @PrimaryColumn(

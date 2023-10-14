@@ -43,7 +43,7 @@ export class DataService {
 
     public async getAllOfficeData()
     {
-        return await this.officeRepository.find({relations: {openHours: true, openHoursIndividual: true}})
+        return await this.officeRepository.find({relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
     }
 
     public async parseJsonAtms()
