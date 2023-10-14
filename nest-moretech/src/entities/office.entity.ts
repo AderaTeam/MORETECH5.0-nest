@@ -67,6 +67,7 @@ export class Office {
         {
             type: 'decimal',
             precision: 10,
+            scale: 8,
             nullable: true,
         }
     )
@@ -76,6 +77,7 @@ export class Office {
         {
             type: 'decimal',
             precision: 10,
+            scale: 8,
             nullable: true,
         }
     )
