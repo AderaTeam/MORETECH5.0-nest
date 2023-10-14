@@ -14,6 +14,8 @@ async function bootstrap() {
       "http://adera-team.ru",
       "https://adera-team.ru/",
       "http://adera-team.ru/",
+      "https://www.adera-team.ru/",
+      "http://www.adera-team.ru/",
     ]
   })
   await app.listen(8000);
