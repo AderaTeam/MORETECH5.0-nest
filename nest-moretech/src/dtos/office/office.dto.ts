@@ -31,10 +31,10 @@ export class OfficeDto
     hasRamp: string
 
     
-    latitude: string
+    latitude: number
 
     
-    longitude: string
+    longitude: number
 
     
     metroStation: string

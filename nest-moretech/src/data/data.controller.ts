@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
 import { DataService } from './data.service';
 
 @Controller('data')
@@ -14,10 +14,18 @@ export class DataController {
     }
 
     @Get('offices')
+    public async getOfficesInRadius(@Query() query)
+    {
+        return await this.dataService.getAllOfficeDataInRadius(Number(query.latitude), Number(query.longitude))
+    }
+
+    @Get('alloffices')
     public async getOffices()
     {
-        return this.dataService.getAllOfficeData()
+        return await this.dataService.getAllOfficeData()
     }
+
+
 
     @Post('atms')
     public async parseATMs()

@@ -3,7 +3,7 @@ import { ATM } from 'src/entities/atm.entity';
 import { Office } from 'src/entities/office.entity';
 import { OpenHours } from 'src/entities/openHours.entity';
 import { OpenHoursIndividual } from 'src/entities/openHoursIndividual.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class DataService {
@@ -44,6 +44,14 @@ export class DataService {
     public async getAllOfficeData()
     {
         return await this.officeRepository.find({relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
+    }
+
+    public async getAllOfficeDataInRadius(latitude: number, longitude: number)
+    {
+        console.log(latitude + ' ' + longitude)
+        console.log((latitude - 0.25) + ' ' + (latitude + 0.25) )
+        console.log((longitude - 0.25) + ' ' + (longitude + 0.25) )
+        return await this.officeRepository.find({where:{latitude: Between(Number(latitude - 0.25), Number(latitude + 0.25) ), longitude: Between(Number(longitude - 0.25), Number(longitude + 0.25) )}, relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
     }
 
     public async parseJsonAtms()

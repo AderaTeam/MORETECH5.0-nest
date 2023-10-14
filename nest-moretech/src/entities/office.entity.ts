@@ -65,17 +65,21 @@ export class Office {
 
     @Column(
         {
+            type: 'decimal',
+            precision: 10,
             nullable: true,
         }
     )
-    latitude: string
+    latitude: number    
 
     @Column(
         {
+            type: 'decimal',
+            precision: 10,
             nullable: true,
         }
     )
-    longitude: string
+    longitude: number
 
     @Column(
         {
