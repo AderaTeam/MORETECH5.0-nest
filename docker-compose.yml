@@ -41,8 +41,8 @@ services:
       - ~/../etc/letsencrypt/live/adera-team.ru/privkey.pem:/etc/nginx/ssl/privkey.pem
 
     ports:
-            - "80:80"
-            - "443:443"
+            - "8011:80"
+            - "4431:443"
 
 #  py:
 #    image: python

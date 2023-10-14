@@ -3,7 +3,7 @@ import { ATM } from 'src/entities/atm.entity';
 import { Office } from 'src/entities/office.entity';
 import { OpenHours } from 'src/entities/openHours.entity';
 import { OpenHoursIndividual } from 'src/entities/openHoursIndividual.entity';
-import { Any, Between, Repository } from 'typeorm';
+import { Any, Between, MoreThan, Repository } from 'typeorm';
 
 @Injectable()
 export class DataService {
@@ -17,7 +17,19 @@ export class DataService {
         @Inject("ATM_REPOSITORY")
         private ATMRepository: Repository<ATM>,
     ){}
-
+    RKOServices = [
+        'Аренда сейфовых ячеейк',
+        'Открытие счета эскроу',
+        'Оформление банкротства физических лиц',
+        'Выдача автокредита',
+        'Выдача ипотеки',
+        'Страховые и сервисные продукты',
+        'Подключение эквайринга',
+        'Отрытие депозитов',
+        'ВЭД',
+        'Документарные операции',
+        'Торговое и экспортное финансирование'
+    ]; 
 
     public async parseJsonOffices()
     {
@@ -50,15 +62,19 @@ export class DataService {
         return await this.officeRepository.find({where:{latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) )}, relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
     }
 
-    public async getAllOfficeDataWithCriteria(latitude: number, longitude: number, hasRamp: boolean, premium: boolean, callButton: boolean)
+    public async getAllOfficeDataWithCriteria(latitude: number, longitude: number, hasRamp: boolean, premium: boolean, callButton: boolean, userRole: string, service: string)
     {
+
         return await this.officeRepository.find(
             {where:
                 {latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), 
                     longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) ), 
                     ...(hasRamp? {hasRamp: 'Y'} : {}), 
                     ...(premium? {officeType: 'Да (Зона Привилегия)'} : {}),
-                    ...(callButton? {salePointFormat: 'Универсальный'} : {})
+                    ...(callButton? {salePointFormat: 'Универсальный'} : {}),
+                    ...(userRole == 'individual'? {openHoursIndividual: MoreThan(1)}: {}),
+                    ...(userRole == 'organization'? {openHours: MoreThan(1)}: {}),
+                    ...(this.RKOServices.includes(service)? {rko: 'есть РКО'}: {})
                 }, 
             relations: {openHours: true, openHoursIndividual: true}, 
             select:{openHours: {days: true, hours: true}, 

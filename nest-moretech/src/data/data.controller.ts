@@ -28,7 +28,14 @@ export class DataController {
     @Get('officeswithcriterias')
     public async getOfficesWithCriterias(@Query() query)
     {
-        return await this.dataService.getAllOfficeDataWithCriteria(Number(query.latitude), Number(query.longitude), Boolean(query.hasRamp == 'true'),  Boolean(query.premium == 'true'), Boolean(query.callButton == 'true'))
+        return await this.dataService.getAllOfficeDataWithCriteria(
+            Number(query.latitude), 
+            Number(query.longitude),
+             Boolean(query.hasRamp == 'true'),  
+             Boolean(query.premium == 'true'), 
+             Boolean(query.callButton == 'true'), 
+             query.userRole,
+             query.service)
     }
 
     @Post('atms')
