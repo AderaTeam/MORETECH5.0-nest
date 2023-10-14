@@ -3,7 +3,7 @@ import { ATM } from 'src/entities/atm.entity';
 import { Office } from 'src/entities/office.entity';
 import { OpenHours } from 'src/entities/openHours.entity';
 import { OpenHoursIndividual } from 'src/entities/openHoursIndividual.entity';
-import { Between, Repository } from 'typeorm';
+import { Any, Between, Repository } from 'typeorm';
 
 @Injectable()
 export class DataService {
@@ -26,7 +26,6 @@ export class DataService {
         var json=JSON.parse(data);
         var current
         for(const subjson of json) {
-            console.log(subjson)
             const current = this.officeRepository.create(subjson)
             const id = await this.officeRepository.insert(current)
             for(const day of subjson.openHours){
@@ -49,6 +48,21 @@ export class DataService {
     public async getAllOfficeDataInRadius(latitude: number, longitude: number)
     {
         return await this.officeRepository.find({where:{latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) )}, relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
+    }
+
+    public async getAllOfficeDataWithCriteria(latitude: number, longitude: number, hasRamp: boolean, premium: boolean, callButton: boolean)
+    {
+        return await this.officeRepository.find(
+            {where:
+                {latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), 
+                    longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) ), 
+                    ...(hasRamp? {hasRamp: 'Y'} : {}), 
+                    ...(premium? {officeType: 'Да (Зона Привилегия)'} : {}),
+                    ...(callButton? {salePointFormat: 'Универсальный'} : {})
+                }, 
+            relations: {openHours: true, openHoursIndividual: true}, 
+            select:{openHours: {days: true, hours: true}, 
+            openHoursIndividual: {days: true, hours: true}}})
     }
 
     public async parseJsonAtms()
