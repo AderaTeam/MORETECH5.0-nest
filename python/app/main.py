@@ -118,3 +118,22 @@ def default(amount: int):
         epochs=10
     )
     return (list(map(float, pred.T[0])))
+
+
+@app.get('/get_raiting_by_id/{id}')
+def get_raiting_by_id(id: int):
+    return get_rating_by_id(id)
+
+
+@app.get('/get_id_by_name/{name}&{apikey}')
+def get_id_by_name(name: str, apikey: str):
+    obj = get_objects_from_ambit_response(get_place(text=name, api_key=apikey))[0]['properties']['CompanyMetaData']['id']
+    return obj
+
+
+@app.get('/get_count_of_people/')
+def get_count_of_people():
+    img = load_image()
+    res = cv_model.predict(img.reshape(1, 224, 224, 3))[0, 0]
+    print(res)
+    return int(res/10)
