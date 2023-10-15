@@ -85,7 +85,7 @@ model = FastModel(11, 1)
 def default(amount: int):
     objects = []
     for i in range(amount):
-        objects.append(sample(data_customer_const_1, 1))
+        objects.append(sample(data_customer_const_1, 1)[0])
     print(torch.tensor(objects))
     env = Env(get_propability_for_checkout_transport=get_propability_for_checkout_transport,
     change_distance_by_transport=change_distance_by_transport,
