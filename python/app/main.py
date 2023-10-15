@@ -93,7 +93,7 @@ with open('models/raiting_check/std_scaler_for_raiting.pkl', 'rb') as f:
 model = FastModel(11, 1)
 
 
-@app.get('/{amount}')
+@app.get('/aprox/{amount}')
 def default(amount: int):
     model = FastModel(11, 1)
     if amount == 0:

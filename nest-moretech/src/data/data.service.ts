@@ -61,7 +61,7 @@ export class DataService {
     public async getAllOfficeDataInRadius(latitude: number, longitude: number)
     {
         let data = await this.officeRepository.find({where:{latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) )}, relations: {openHours: true, openHoursIndividual: true}, select:{openHours: {days: true, hours: true}, openHoursIndividual: {days: true, hours: true}}})
-        let priorities = (await axios.get(`http://178.170.192.87:9001/${(data as Office[]).length}`)).data
+        let priorities = (await axios.get(`http://178.170.192.87:9001/aprox/${(data as Office[]).length}`)).data
         let priortags = []
         for (const prior in priorities)
         {
@@ -96,7 +96,7 @@ export class DataService {
             select:{openHours: {days: true, hours: true}, 
             openHoursIndividual: {days: true, hours: true}}})
         console.log((data as Office[]).length)
-        let priorities = (await axios.get(`http://178.170.192.87:9001/${(data as Office[]).length}`)).data
+        let priorities = (await axios.get(`http://178.170.192.87:9001/aprox/${(data as Office[]).length}`)).data
         let priortags = []
         for (const prior in priorities)
         {
