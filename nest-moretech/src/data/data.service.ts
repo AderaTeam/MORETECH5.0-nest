@@ -66,7 +66,7 @@ export class DataService {
         for (const prior in priorities)
         {
             console.log(prior)
-            priortags.push(Number(prior) < 0.2 ? 'Низкая' : Number(prior) > 0.8 ? 'Выоская': 'Средняя')
+            priortags.push(Number(prior) < 0.2 ? 'Низкая' : Number(prior) > 0.8 ? 'Выcjкая': 'Средняя')
         }
         let i = 0
         let ans = []
