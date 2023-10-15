@@ -44,6 +44,19 @@ app.add_middleware(
         "http://localhost:9000",
         "http://127.0.0.1:9000/",
         "http://127.0.0.1:9000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://178.170.192.87:3000",
+        "http://178.170.192.87:3000/",
+        "https://adera-team.ru",
+        "http://adera-team.ru",
+        "https://adera-team.ru/",
+        "http://adera-team.ru/",
+        "https://www.adera-team.ru/",
+        "http://www.adera-team.ru/",
+        "https://www.adera-team.ru",
+        "http://www.adera-team.ru",
+
 
     ],
     allow_credentials=True,
@@ -142,3 +155,12 @@ def get_count_of_people():
     res = cv_model.predict(img.reshape(1, 224, 224, 3))[0, 0]
     print(res)
     return int(res/10)
+
+@app.post('/file')
+async def create_upload_file(file: UploadFile):
+    try:
+        with open('./NNModel/model_crowd_count.h5', "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+    finally:
+        file.file.close()  
+        return "ok"
