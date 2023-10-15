@@ -81,7 +81,7 @@ export class DataService {
             select:{openHours: {days: true, hours: true}, 
             openHoursIndividual: {days: true, hours: true}}})
         console.log((data as Office[]).length)
-        let priorities = await axios.get(`http://178.170.192.87:9001/${(data as Office[]).length}`)
+        let priorities = (await axios.get(`http://178.170.192.87:9001/${(data as Office[]).length}`)).data
         let priortags = []
         for (const prior in priorities)
         {
