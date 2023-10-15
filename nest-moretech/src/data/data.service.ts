@@ -85,10 +85,10 @@ export class DataService {
         let priortags = []
         for (const prior in priorities)
         {
+            console.log(prior)
             priortags.push(Number(prior) < 0.2 ? 'Низкая' : Number(prior) > 0.6 ? 'Выоская': 'Средняя')
         }
         let i = 0
-        console.log(data)
         let ans = []
         for (const element of data as Office[])
         {
