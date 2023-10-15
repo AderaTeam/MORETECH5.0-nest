@@ -13,3 +13,4 @@ scikit-learn
 dill
 pydantic
 torch
+tensorflow
