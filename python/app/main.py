@@ -106,4 +106,4 @@ def default(amount: int):
         from_vector_to_dict=from_vector_to_dict,
         env=env,
     )
-    return ','.join(list(map(str, pred.T[0])))
+    return (list(map(float, pred.T[0])))
