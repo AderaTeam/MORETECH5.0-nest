@@ -7,13 +7,13 @@ export class AdminController {
     constructor(
         private adminService: AdminService,
     ){}
-    @Post('signup')
+    @Post()
     public async signup(@Body() adminDto: AdminDto)
     {
         return await this.adminService.signup(adminDto);
     }
 
-    @Post()
+    @Post('signin')
     public async signin(@Body() adminDto: AdminDto)
     {
         return await this.adminService.signin(adminDto);

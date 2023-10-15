@@ -55,4 +55,4 @@ services:
       gunicorn -k uvicorn.workers.UvicornWorker --log-level trace main:app -b :80
       "
     ports:
-      - 8003:80
+      - 9001:80

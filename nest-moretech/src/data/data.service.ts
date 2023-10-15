@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import axios from 'axios';
 import { ATM } from 'src/entities/atm.entity';
 import { Office } from 'src/entities/office.entity';
 import { OpenHours } from 'src/entities/openHours.entity';
@@ -65,7 +66,7 @@ export class DataService {
     public async getAllOfficeDataWithCriteria(latitude: number, longitude: number, hasRamp: boolean, premium: boolean, callButton: boolean, userRole: string, service: string)
     {
 
-        return await this.officeRepository.find(
+        let data = await this.officeRepository.find(
             {where:
                 {latitude: Between(Number(latitude - 0.5), Number(latitude + 0.5) ), 
                     longitude: Between(Number(longitude - 0.5), Number(longitude + 0.5) ), 
@@ -79,6 +80,20 @@ export class DataService {
             relations: {openHours: true, openHoursIndividual: true}, 
             select:{openHours: {days: true, hours: true}, 
             openHoursIndividual: {days: true, hours: true}}})
+        let priorities = await axios.get(`http://localhost:9001/${(data as Office[]).length}`)
+        let priortags = []
+        for (const prior in priorities)
+        {
+            priortags.push(Number(prior) < 0.2 ? 'Низкая' : Number(prior) > 0.6 ? 'Выоская': 'Средняя')
+        }
+        let i = 0
+        console.log(data)
+        for (const element in data as Office[])
+        {
+            element['crowd'] = priortags[i]
+            i++
+        }
+        return data
     }
 
     public async parseJsonAtms()
