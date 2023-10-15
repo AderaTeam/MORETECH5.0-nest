@@ -149,7 +149,7 @@ def get_id_by_name(name: str, apikey: str):
     return obj
 
 
-@app.get('/get-count-of-people/')
+@app.get('/get-count-of-people')
 def get_count_of_people():
     img = load_image()
     cv_model = tensorflow.keras.models.load_model('./NNmodel/model_crowd_count.h5')
