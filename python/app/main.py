@@ -3,7 +3,7 @@ load_dotenv()
 import pickle
 import tempfile
 import shutil
-from random import choice
+from random import sample
 import pandas as pd
 import numpy as np
 import scipy
