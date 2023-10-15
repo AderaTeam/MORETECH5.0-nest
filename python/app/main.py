@@ -3,7 +3,7 @@ load_dotenv()
 import pickle
 import tempfile
 import shutil
-from random import sample
+from random import choice
 import pandas as pd
 import numpy as np
 import scipy
@@ -15,6 +15,11 @@ import dill
 import torch
 from pydantic import BaseModel
 from typing import List
+import tensorflow
+
+
+from yandex_map_api import *
+from cv import load_image
 
 
 from Env import Env, get_propability_of_walk_age, get_propability_for_checkout_transport, change_distance_by_transport, from_vector_to_dict, dataset_preprocessor_for_raiting, model_pred, FastModel
