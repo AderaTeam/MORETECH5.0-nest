@@ -90,7 +90,7 @@ export class DataService {
         let i = 0
         console.log(data)
         let ans = []
-        for (const element in data as Office[])
+        for (const element in data)
         {
             ans.push({office: element, crowd: priortags[i]})
             i++
