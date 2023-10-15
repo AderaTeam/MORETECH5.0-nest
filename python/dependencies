@@ -14,3 +14,5 @@ dill
 pydantic
 torch
 tensorflow
+bs4
+requests
