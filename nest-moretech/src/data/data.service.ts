@@ -80,7 +80,8 @@ export class DataService {
             relations: {openHours: true, openHoursIndividual: true}, 
             select:{openHours: {days: true, hours: true}, 
             openHoursIndividual: {days: true, hours: true}}})
-        let priorities = await axios.get(`http://localhost:9001/${(data as Office[]).length}`)
+        console.log((data as Office[]).length)
+        let priorities = await axios.get(`http://178.170.192.87:9001/${(data as Office[]).length}`)
         let priortags = []
         for (const prior in priorities)
         {
@@ -88,12 +89,13 @@ export class DataService {
         }
         let i = 0
         console.log(data)
+        let ans = []
         for (const element in data as Office[])
         {
-            element['crowd'] = priortags[i]
+            ans.push({office: element, crowd: priortags[i]})
             i++
         }
-        return data
+        return ans
     }
 
     public async parseJsonAtms()
