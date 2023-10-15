@@ -85,6 +85,9 @@ model = FastModel(11, 1)
 
 @app.get('/{amount}')
 def default(amount: int):
+    model = FastModel(11, 1)
+    if amount == 0:
+        return 0
     objects = []
     for i in range(amount):
         objects.append(sample(data_customer_const_1, 1)[0])
@@ -103,4 +106,4 @@ def default(amount: int):
         from_vector_to_dict=from_vector_to_dict,
         env=env,
     )
-    return (list(map(float, pred.T[0])))
+    return ','.join(list(map(str, pred.T[0])))
